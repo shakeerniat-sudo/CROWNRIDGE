@@ -361,7 +361,7 @@ ESTIMATED RECOVERY TIME: ${ai.estimatedRecoveryTime}
           </button>
           <button
             onClick={downloadPDF}
-            className="flex items-center gap-1.5 px-3.5 py-2 bg-brand-700/80 hover:bg-brand-600 text-white text-xs font-bold rounded-xl transition-all shadow shadow-brand-700/10 cursor-pointer"
+            className="flex items-center gap-1.5 px-3 py-2 bg-dark-900 hover:bg-dark-800 text-xs font-semibold border border-white/5 rounded-xl transition-all cursor-pointer"
           >
             <Download className="h-3.5 w-3.5" />
             Download PDF Report

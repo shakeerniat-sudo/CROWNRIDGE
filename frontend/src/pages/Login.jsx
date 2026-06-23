@@ -37,9 +37,9 @@ const Login = ({ setUser }) => {
 
   return (
     <div className="min-h-[80vh] flex flex-col justify-center items-center px-4 animate-fade-in">
-      <div className="w-full max-w-md glass-panel rounded-3xl p-8 border-white/5 relative overflow-hidden">
+      <div className="w-full max-w-lg glass-panel rounded-3xl p-10 border-white/5 relative overflow-hidden">
         {/* Glowing Top Ambient Effect */}
-        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-brand-600 to-emerald-400"></div>
+        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-brand-600 to-brand-400"></div>
 
         {/* Brand Banner */}
         <div className="flex flex-col items-center mb-8">

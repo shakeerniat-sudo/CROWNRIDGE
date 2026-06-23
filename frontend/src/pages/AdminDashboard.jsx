@@ -2,20 +2,23 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { 
   Chart as ChartJS, CategoryScale, LinearScale, PointElement, 
-  LineElement, BarElement, ArcElement, Title, Tooltip, Legend 
+  LineElement, BarElement, ArcElement, Title, Tooltip, Legend, Filler
 } from 'chart.js';
 import { Line, Doughnut, Bar } from 'react-chartjs-2';
 import { 
   BarChart3, PlusCircle, CheckCircle, AlertTriangle, 
   MessageSquare, Star, Settings, Calendar, ShieldCheck 
 } from 'lucide-react';
+import { useTheme } from '../components/ThemeContext';
 
 ChartJS.register(
   CategoryScale, LinearScale, PointElement, LineElement, 
-  BarElement, ArcElement, Title, Tooltip, Legend
+  BarElement, ArcElement, Title, Tooltip, Legend, Filler
 );
 
 const AdminDashboard = () => {
+  const { theme } = useTheme();
+  const isLight = theme === 'light';
   const [analytics, setAnalytics] = useState(null);
   const [feedbackLogs, setFeedbackLogs] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -104,8 +107,8 @@ const AdminDashboard = () => {
     datasets: [{
       label: 'Delay Reports Filed',
       data: analytics?.charts.dailyTrend.map(d => d.count) || [],
-      borderColor: '#22c55e',
-      backgroundColor: 'rgba(34, 197, 94, 0.1)',
+      borderColor: isLight ? '#2563eb' : '#22c55e',
+      backgroundColor: isLight ? 'rgba(37, 99, 235, 0.1)' : 'rgba(34, 197, 94, 0.1)',
       borderWidth: 2.5,
       tension: 0.35,
       fill: true
@@ -118,16 +121,23 @@ const AdminDashboard = () => {
     labels: rcLabels,
     datasets: [{
       data: rcData,
-      backgroundColor: [
+      backgroundColor: isLight ? [
+        'rgba(37, 99, 235, 0.8)', // royal blue
+        'rgba(59, 130, 246, 0.8)', // hover blue
+        'rgba(245, 158, 11, 0.8)', // amber
+        'rgba(239, 68, 68, 0.8)',  // red
+        'rgba(139, 92, 246, 0.8)', // purple
+        'rgba(71, 85, 105, 0.8)',  // slate
+      ] : [
         'rgba(34, 197, 94, 0.75)', // green
-        'rgba(59, 130, 246, 0.75)', // blue
+        'rgba(22, 163, 74, 0.75)', // darker green
         'rgba(245, 158, 11, 0.75)', // amber
         'rgba(239, 68, 68, 0.75)',  // red
         'rgba(139, 92, 246, 0.75)', // purple
         'rgba(100, 116, 139, 0.75)', // slate
       ],
       borderWidth: 1,
-      borderColor: 'rgba(255, 255, 255, 0.05)'
+      borderColor: isLight ? '#ffffff' : 'rgba(255, 255, 255, 0.05)'
     }]
   };
 
@@ -142,7 +152,7 @@ const AdminDashboard = () => {
         if (s === 'Critical') return 'rgba(239, 68, 68, 0.75)';
         if (s === 'High') return 'rgba(245, 158, 11, 0.75)';
         if (s === 'Medium') return 'rgba(234, 179, 8, 0.75)';
-        return 'rgba(59, 130, 246, 0.75)';
+        return isLight ? 'rgba(37, 99, 235, 0.75)' : 'rgba(59, 130, 246, 0.75)';
       }),
       borderWidth: 0,
       borderRadius: 6
@@ -153,12 +163,18 @@ const AdminDashboard = () => {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
-      legend: { labels: { color: '#94a3b8', font: { family: 'Outfit', size: 10 } } },
+      legend: { labels: { color: isLight ? '#475569' : '#94a3b8', font: { family: 'Outfit', size: 10 } } },
       tooltip: { titleFont: { family: 'Outfit' }, bodyFont: { family: 'Outfit' } }
     },
     scales: {
-      x: { grid: { color: 'rgba(255, 255, 255, 0.03)' }, ticks: { color: '#64748b', font: { family: 'Outfit', size: 9 } } },
-      y: { grid: { color: 'rgba(255, 255, 255, 0.03)' }, ticks: { color: '#64748b', font: { family: 'Outfit', size: 9 }, stepSize: 1 } }
+      x: { 
+        grid: { color: isLight ? '#e2e8f0' : 'rgba(255, 255, 255, 0.03)' }, 
+        ticks: { color: isLight ? '#475569' : '#64748b', font: { family: 'Outfit', size: 9 } } 
+      },
+      y: { 
+        grid: { color: isLight ? '#e2e8f0' : 'rgba(255, 255, 255, 0.03)' }, 
+        ticks: { color: isLight ? '#475569' : '#64748b', font: { family: 'Outfit', size: 9 }, stepSize: 1 } 
+      }
     }
   };
 
