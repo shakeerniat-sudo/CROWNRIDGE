@@ -57,7 +57,7 @@ const Login = ({ setUser }) => {
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-5">
+        <form onSubmit={handleSubmit} className="space-y-5" autoComplete="off">
           <div>
             <label className="block text-xs font-bold text-dark-300 uppercase tracking-wider mb-2">Corporate Email</label>
             <div className="relative">
@@ -67,6 +67,7 @@ const Login = ({ setUser }) => {
               <input
                 type="email"
                 required
+                autoComplete="off"
                 className="w-full pl-10 pr-4 py-3 rounded-xl glass-input text-sm"
                 placeholder="j.doe@crownridge.com"
                 value={email}
@@ -84,6 +85,7 @@ const Login = ({ setUser }) => {
               <input
                 type="password"
                 required
+                autoComplete="new-password"
                 className="w-full pl-10 pr-4 py-3 rounded-xl glass-input text-sm"
                 placeholder="••••••••"
                 value={password}
